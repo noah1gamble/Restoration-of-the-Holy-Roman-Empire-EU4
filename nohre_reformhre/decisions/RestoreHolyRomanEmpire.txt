@@ -1,0 +1,103 @@
+country_decisions = {
+
+	restore_holy_roman_empire = {
+		major = yes		
+		potential = {
+		is_subject = no
+		}
+	potential = {
+			europe = {
+				type = any
+				owned_by = ROOT
+			}
+			normal_or_historical_nations = yes
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			NOT = { exists = GER }
+			NOT = { exists = HLR } 
+			NOT = { tag = PAP }
+			NOT = { has_country_flag = formed_hre_flag }
+		}
+	allow = {
+		manpower > 100
+		army_size_percentage > 0.55
+		AND = {
+			OR = {
+				government = monarchy
+				AND = {
+					government = republic
+					republican_tradition = 90
+				}
+			}
+			NOT = { 
+				government = theocracy
+			}
+		}
+		prestige > 90
+		stability > 2
+		OR = {
+			legitimacy > 90
+			republican_tradition > 90
+		}
+			AND = {
+				culture_group = germanic
+				NOT = {
+					ruler_is_foreigner = yes
+				}
+			}
+			AND = {
+				OR = {
+					ROOT = {
+						dominant_religion = catholic
+					}
+					ROOT = {
+						dominant_religion = protestant
+					}
+				}
+				religion_group = christian
+				religious_unity = 0.80
+			}
+			religion_group = christian	
+			OR = { #TODO: redo with core percentage -cant figure it out...
+				ROOT = {
+					owns = 50
+					north_german_region = {
+						type = all
+						owned_by = ROOT		
+					}
+					owns = 134
+					south_german_region = {
+						type = all
+						owned_by = ROOT						
+					}
+				}
+			}
+		}		
+	effect = {
+		country_event = { id = 9075 tooltip = renovatio_effect }		
+			north_german_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = HLR
+			}
+			south_german_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = HLR
+				}		
+		culture_group_union = germanic
+		add_prestige = 10
+		add_legitimacy = 5	
+			set_country_flag = formed_hre_flag
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	
+}
